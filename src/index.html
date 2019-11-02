@@ -1,14 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>AngularElements</title>
-  <base href="/">
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularElements</title>
+    <base href="/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!-- include the web component -->
+    <script type="text/javascript" src="assets/es2015-polyfill.js" nomodule></script>
+    <script type="text/javascript" src="assets/main.js"></script>
+  </head>
+  <body>
+    <ce-header showMySettings="true" id="ce-header-sdpkads"></ce-header>
+    <app-root></app-root>
+    <script>
+      const h = document.getElementById('ce-header-sdpkads');
+      function onShowMySettings() {
+        console.log('test');
+      }
+      h && h.addEventListener('showMySettings', onShowMySettings);
+    </script>
+  </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularElements vanilla js app</title>
+    <base href="file:///C:/Users/gparl/projects/angular-elements/projects/vanilla-js-app/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <script>
+      // If the browser supports Custom Elements we need this
+      // if we downlevel to EcmaScript 5 (CE are define for ES2015+)
+      if (window['customElements']) {
+        const script = document.createElement('script');
+        script.src = 'assets/custom-elements-es5-adapter.js';
+        document.writeln(script.outerHTML);
+      }
+
+      if (!window['customElements']) {
+        const script = document.createElement('script');
+        script.src = 'assets/bundles/webcomponents-sd-ce.js';
+        document.writeln(script.outerHTML);
+      }
+    </script>
+
+    <!-- include the web component -->
+    <script type="text/javascript" src="assets/es2015-polyfills.js" nomodule></script>
+    <script type="text/javascript" src="assets/main.js"></script>
+  </head>
+  <body>
+    <ce-header show-my-settings="true" id="ce-header-sdpkads"></ce-header>
+    <script>
+      const h = document.getElementById('ce-header-sdpkads');
+      function onShowMySettings() {
+        console.log('test');
+      }
+      h && h.addEventListener('menuSelected', onShowMySettings);
+    </script>
+  </body>
+</html>

@@ -11,7 +11,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "ngx-build-plus:build",
           "options": {
             "outputPath": "dist/angular-elements",
             "index": "src/index.html",
@@ -25,7 +25,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/@webcomponents/custom-elements/src/native-shim.js",
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js"
+              }
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -56,7 +61,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "ngx-build-plus:dev-server",
           "options": {
             "browserTarget": "angular-elements:build"
           },
@@ -73,7 +78,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "ngx-build-plus:karma",
           "options": {
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
@@ -124,6 +129,106 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "header-component": {
+      "root": "projects/header-component/",
+      "sourceRoot": "projects/header-component/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/header-component",
+            "index": "projects/header-component/src/index.html",
+            "main": "projects/header-component/src/main.ts",
+            "polyfills": "projects/header-component/src/polyfills.ts",
+            "tsConfig": "projects/header-component/tsconfig.app.json",
+            "assets": [
+              "projects/header-component/src/favicon.ico",
+              "projects/header-component/src/assets"
+            ],
+            "styles": [
+              "projects/header-component/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/header-component/src/environments/environment.ts",
+                  "with": "projects/header-component/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "header-component:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "header-component:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "header-component:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/header-component/src/test.ts",
+            "polyfills": "projects/header-component/src/polyfills.ts",
+            "tsConfig": "projects/header-component/tsconfig.spec.json",
+            "karmaConfig": "projects/header-component/karma.conf.js",
+            "styles": [
+              "projects/header-component/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/header-component/src/favicon.ico",
+              "projects/header-component/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/header-component/tsconfig.app.json",
+              "projects/header-component/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
